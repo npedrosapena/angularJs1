@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hola mundo AngularJs</title>
+</head>
+<body ng-app="myApp">
+
+<!-- carga de AngularJs -->
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+
+<!-- carga de Bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+<!-- ng-model simple -->
+<div class="container">
+    <p> databinding simple</p>
+    <input type="text" class="form-control" ng-model="dataInput" placeholder="nombre">
+    <h1>Bienvenido {{dataInput}}</h1>
+</div>
+
+<!-- ng-model tipo objeto complejo-->
+
+<div class="container">
+    <p> databinding con objeto</p>
+    <h1>valor del Objeto dataInputObject: {{dataInputObject}}</h1>
+    <input type="text" class="form-control" ng-model="dataInputObject.nombre" placeholder="nombre">
+    <input type="text" class="form-control" ng-model="dataInputObject.edad" placeholder="edad">
+    <input type="text" class="form-control" ng-model="dataInputObject.email" placeholder="correo">
+
+    <h1>Bienvenido {{dataInputObject.nombre}}</h1>
+    <p>
+        Tienes {{dataInputObject.edad}} a&ntilde;os y tu correo es {{dataInputObject.email}}
+    </p>
+</div>
+
+<div ng-controller="reloj">
+    <h4>{{reloj}}</h4>
+</div>
+
+    <script type="text/javascript">
+
+        angular.module('myApp',[]) //definimos la aplicación. El nombre y las librerías que se inyectan (más adelante)
+
+        .controller('reloj',['$scope','$timeout',function($scope,$timeout){ //al injectar objetos de AngularJs es una buena práctica el introducirlos entre [] aunque no es necesario.
+
+            //definimos función la cual recoje la fecha actual y con el $timeout se actualiza cada segundo
+            var actualizaReloj=function()
+                                        {
+
+                                            $scope.reloj= new Date();
+
+                                            $timeout(function(){actualizaReloj();},1000);//función a la que llamar cada 1000ms (se retroalimenta)
+                                        };
+
+            actualizaReloj(); //iniciamos la función llamando a la variable que la contiene, la cual se "convierte en una función"
+        }]);
+
+    </script>
+</body>
+</html>
+
+<!--
+
+En esta ocasión, creamos una aplicación llamada myApp a la cual se le pueden cargar o inyectar otras librerías (más adelante).
+A nuestra aplicación le creamos un controlador ( controller ) llamado reloj, al cual le inyectamos los objetos propios de angular
+$scope y $timeout (toda variable que vaya precedida de $ es un objeto propio de AngularJs)
+
+Qué es un controller?
+
+Sería la lógica que controla SOLO la zona o área que lo llama o utiliza. En este ejemplo, sólo controla el div del reloj
+ que es la que tiene el ng-controller definido.
+
+Qué son $scope y $timeout?
+
+Empecemos por la fácil, $timeout es igual que el timeout de javascript, un método el cual necesita de una función (la lógica
+a realizar) y el tiempo (cada cuanto tiempo tiene que ejecutar la lógica programada. EN MILISEGUNDOS). Es decir, en este
+ejemplo, se "retroalimenta" cada segundo escribiendo en la 'variable' $scope.reloj la fecha obtenida por new Date(); (javascript)
+
+
+$scope
+El $scope tiene un concepto muy amplio, pero para ir empezando, vamos a ir pensando que el $scope es el fragmento de código
+que utiliza el controller que lo contiene, es decir, en este ejemplo, y para facilitar el entendimiento ($scope es más completo y complejo)
+el valor que tiene $scope ahora para nosotros sería:
+
+            <div ng-controller="reloj">
+              <h4>{{reloj}}</h4>
+            </div>
+
+y como queremos acceder a la variable de AngularJs reloj, su utilización sería $scope.reloj. Con esto lo que hacemos es
+sobreescribir el valor de new Date(); en la variable reloj del bloque de código que llama a este controller.
+
+Con $scope se puede acceder a cualquier variable (variable normal y corriente de toda la vida, variables en atributos, en
+atributos ng-* etc...
+
+-->
