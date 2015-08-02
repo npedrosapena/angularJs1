@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Eventos de rat&oacute;n con AngularJs</title>
+    </head>
+    <body ng-app="app">
+    <!-- carga de AngularJs -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+
+    <!-- carga de Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+    <!-- cargamos la app en un archivo independiente -->
+    <script type="text/javascript" src="app.js"></script>
+
+        <div ng-controller="controladorBasico">
+
+            <button ng-click="add(1)" class="button">Sumar</button>
+            <a ng-click="substract(1)" class="button">Restar</a>
+
+            <h4>En total: {{contador}}</h4>
+            
+        </div>
+    </body>
+</html>
