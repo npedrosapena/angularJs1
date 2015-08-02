@@ -11,10 +11,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 
-    <!-- cargamos la app en un archivo independiente -->
+    <!-- cargamos la app de un archivo independiente -->
     <script type="text/javascript" src="app.js"></script>
 
         <div ng-controller="controladorBasico">
+
+            <!--
+                En ng-click tenemos una función que sólo está definida aquí, a la cual tendremos que acceder por $scope
+                 más adelante, utilizaremos funciones definidas dentro del propio controller sin necesidad de acceder
+                 a ellas a través del $scope.
+            -->
 
             <button ng-click="add(1)" class="button">Sumar</button>
             <a ng-click="substract(1)" class="button">Restar</a>
